@@ -61,7 +61,7 @@ class Transport {
   public baudrate = 0;
   private traceLog = "";
   private lastTraceTime = Date.now();
-  private reader: ReadableStreamDefaultReader<Uint8Array> | undefined;
+  private reader: ReadableStreamDefaultReader<Uint8Array> | undefined | null;
   private buffer: Uint8Array = new Uint8Array(0);
 
   constructor(public device: SerialPort, public tracing = false, enableSlipReader = true) {
