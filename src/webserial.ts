@@ -453,6 +453,26 @@ class Transport {
     await this.device.close();
     this.reader = undefined;
   }
+
+  /**
+   * Custom method added for release loader
+   * Satish Kumar Yenugu
+   */
+  async releaseReader(): Promise<void> {
+    if (this.reader) {
+      try {
+        await this.reader.cancel();
+      } catch (_) {
+        // ignore cancellation errors
+      }
+      try {
+        this.reader.releaseLock();
+      } catch (_) {
+        // ignore release errors
+      }
+      this.reader = null;
+    }
+  }
 }
 
 export { Transport };
